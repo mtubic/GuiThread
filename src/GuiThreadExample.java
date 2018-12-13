@@ -16,7 +16,7 @@ public class GuiThreadExample extends JFrame {
     private JButton bottomButton = new JButton("Click me");
     // private ButtonThread [][] buttonField = new ButtonThread[x][y];
     private JPanel panel = new JPanel((new GridLayout(x, y)));
-    private boolean fRun;//permanentes durchlaufen des Programmes
+    private boolean fRun = true;//permanentes durchlaufen des Programmes
 
     public GuiThreadExample() {
         super("Threads und GUI");
@@ -29,11 +29,34 @@ public class GuiThreadExample extends JFrame {
         List<JButton> buttonList = new ArrayList<>();
         int i = 0;
 
+        topButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                    run(panel);
+
+
+
+            }
+        });
         for (i = 1; i <= 16; i++) {
             JButton button = new JButton("");
             panel.add(button);
             button.setEnabled(true);
             button.setBackground(Color.GRAY);
+
+
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    // wenn grün -> setze auf grau
+                    button.setBackground(Color.GRAY);
+
+                }
+
+
+
+            });
         }
 
 
@@ -51,24 +74,7 @@ public class GuiThreadExample extends JFrame {
         bottomButton.setEnabled(false);
 
 
-        topButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new Thread() {
-                    public void run() {
-                        bottomButton.setEnabled(true);
-                        try {
-                            Thread.sleep(1000);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
 
-                        bottomButton.setBackground(Color.BLUE);
-                    }
-
-                }.start();
-            }
-        });
 
 
         bottomButton.addActionListener(new ActionListener() {
@@ -83,11 +89,11 @@ public class GuiThreadExample extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
 
-        run(panel);
+
     }
 
     private void run (JPanel p) {
-        fRun = true;
+
         int time = 0;
         while (fRun) {
             boolean noGreen = true;
