@@ -32,7 +32,6 @@ public class GuiThreadExample extends JFrame {
         topButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
                     run(panel);
 
 
@@ -95,7 +94,6 @@ public class GuiThreadExample extends JFrame {
     private void run (JPanel p) {
 
         int time = 0;
-        while (fRun) {
             boolean noGreen = true;
             int checkGreen = 0;
 
@@ -125,7 +123,6 @@ public class GuiThreadExample extends JFrame {
                     e.printStackTrace();
                 }
             }
-        }
 
     }
 }
