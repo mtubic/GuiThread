@@ -57,7 +57,7 @@ public class Connection {
         }
     }
 
-    public String getNameOfPlayer(){
+    public String getNameOfPlayer() {
         return this.name;
     }
 

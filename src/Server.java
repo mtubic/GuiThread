@@ -57,7 +57,7 @@ public class Server {
         s.start();
     }
 
-    public void stop(){
+    public void stop() {
         running = false;
     }
 

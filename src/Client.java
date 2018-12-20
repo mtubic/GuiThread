@@ -8,60 +8,49 @@ public class Client {
 
     private String host;
     private int port;
-    private Game callback;
-    private myConnection conn;
+    private GuiThreadExample callback;
+    private Connection conn;
 
-    public Client(String host, int port){
+    public Client(String host, int port) {
         this.host = host;
         this.port = port;
 
     }
-    public void start (Game CallBack) {
-        callback = CallBack;
-        try {
-            conn= new myConnection(new Socket(host,port));
 
+    public void start(GuiThreadExample CallBack) {
+        callback = CallBack;
+
+        try {
+            conn = new Connection(new Socket(host, port));
             conn.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     getMessage(actionEvent.getActionCommand(), CallBack);
                 }
 
-                private void getMessage(String actionCommand, Game callBack) {
-                    System.out.println(actionCommand);
-                    System.out.println(actionCommand);
-                    
-                    if(actionCommand.contains("Congratulation, you win!")){
-                        String winner = actionCommand.split(":")[1].split(";")[0];
-                        int winnerTime = Integer.parseInt(actionCommand.split("")[1].split(";")[1]);
-                        
-                    }
-                }
             });
-            conn.startConn();
+            conn.startConnect();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private class myConnection {
-        public myConnection(Socket socket) {
-        }
+    private void getMessage(String actionCommand, GuiThreadExample callBack) {
+        System.out.println(actionCommand);
+        System.out.println(actionCommand);
 
-        public void addActionListener(ActionListener actionListener) {
-        }
+        if (actionCommand.contains("Congratulation, you win!")) {
+            String winner = actionCommand.split(":")[1].split(";")[0];
+            int winnerTime = Integer.parseInt(actionCommand.split("")[1].split(";")[1]);
 
-        public void startConn() {
-        }
-
-        public void close() {
         }
     }
 
-    private class Game {
+    public void sendMessage(String actionCommand) {
+        conn.sendMessage(actionCommand);
     }
-    
-    public void stop(){
+
+    public void stop() {
         conn.close();
     }
 }

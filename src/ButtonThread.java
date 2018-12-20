@@ -6,28 +6,30 @@ public class ButtonThread extends JButton {
 
     private boolean fRun;
 
-    public ButtonThread(){
+    public ButtonThread() {
         this.setBackground(Color.WHITE);
         this.addActionListener();
     }
 
     private void addActionListener() {
-        if(this.getBackground()==Color.GREEN){
+        if (this.getBackground() == Color.GREEN) {
             killThread();
             this.setBackground(Color.WHITE);
         }
     }
-    public void startThread(){
+
+    public void startThread() {
         Thread t = new Thread();
         t.start();
     }
-    public void run(){
-        fRun=true;
+
+    public void run() {
+        fRun = true;
         this.setBackground(Color.GREEN);
     }
 
     private void killThread() {
-        fRun=false;
+        fRun = false;
     }
 
 
